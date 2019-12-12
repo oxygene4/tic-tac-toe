@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import {Component} from '@angular/core';
+import {AngularFireDatabase} from '@angular/fire/database';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -17,7 +17,9 @@ export class AppComponent {
   }
 
   onSubmit() {
-    this.db.list('items').push({ content: this.itemValue });
-    this.itemValue = '';
+    if (this.itemValue) {
+      this.db.list('items').push({content: this.itemValue});
+      this.itemValue = '';
+    }
   }
 }
