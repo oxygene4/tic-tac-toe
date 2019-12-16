@@ -1,0 +1,40 @@
+<nav>
+  <a (click)="logout()">Logout</a>
+</nav>
+
+<h1>Home page</h1>
+<div>
+  <div>
+    <div>
+      <img [src]="user.image" *ngIf="user.image" alt="User image">
+      <img src="https://via.placeholder.com/400x300" *ngIf="!user.image" alt="User image">
+      <div *ngIf='user.provider != "password"'>
+        <h4>{{user.name}}</h4>
+        <p>This is an example of Social Authentication using Firebase</p>
+      </div>
+      <div *ngIf='user.provider == "password"'>
+        <form [formGroup]="profileForm">
+          <div>
+            <label>Your name</label>
+            <input type="text" formControlName="name" required>
+          </div>
+        </form>
+        <a (click)="save(profileForm.value)">Save</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<h3>NG course requirements</h3>
+<form (ngSubmit)="onSubmit()">
+  <input type="text" name="item" required [(ngModel)]="itemValue">
+
+  <button type="submit">add</button>
+</form>
+
+<pre *ngFor="let item of items | async">
+    {{ item.content }}
+</pre>
+

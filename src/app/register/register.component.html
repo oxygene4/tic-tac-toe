@@ -1,0 +1,29 @@
+<h1>Register</h1>
+<div>
+  <div>
+    <div>
+      <form [formGroup]="registerForm">
+        <div>
+          <label>Email address</label>
+          <input type="email" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" formControlName="password">
+          <label>{{errorMessage}}</label>
+          <label>{{successMessage}}</label>
+        </div>
+        <button type="submit" (click)="tryRegister(registerForm.value)">Register</button>
+      </form>
+    </div>
+  </div>
+  <div>
+    <button type="button" (click)="tryFacebookLogin()">Register with Facebook</button>
+  </div>
+  <div>
+    <button type="button" (click)="tryGoogleLogin()">Register with Google</button>
+  </div>
+  <div>
+    <p>Already have an account? <a href="/login">Login</a></p>
+  </div>
+</div>

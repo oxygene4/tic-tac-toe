@@ -1,12 +1,3 @@
 <main>
-  <h3>NG course requirements</h3>
-  <form (ngSubmit)="onSubmit()">
-    <input type="text" name="item" required [(ngModel)]="itemValue">
-
-    <button type="submit">add</button>
-  </form>
-
-  <pre *ngFor="let item of items | async">
-    {{ item.content }}
-  </pre>
+  <router-outlet></router-outlet>
 </main>
