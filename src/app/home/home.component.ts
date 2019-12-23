@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {UserService} from '../core/user.service';
 import {AuthService} from '../core/auth.service';
 import {ActivatedRoute} from '@angular/router';
@@ -6,15 +6,17 @@ import {Location} from '@angular/common';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FirebaseUserModel} from '../core/user.model';
 import {AngularFireDatabase} from '@angular/fire/database';
-import {Observable} from 'rxjs';
+
+// import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.component.html'
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  itemValue = '';
-  items: Observable<any[]>;
+  // itemValue = '';
+  // items: Observable<any[]>;
   user: FirebaseUserModel = new FirebaseUserModel();
   profileForm: FormGroup;
 
@@ -26,25 +28,28 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder,
     public db: AngularFireDatabase
   ) {
-    this.items = db.list('items').valueChanges();
+    // this.items = db.list('items').valueChanges();
   }
+
+  @ViewChild('updateNameLink', {static: false}) updateNameLink: ElementRef;
+  @ViewChild('updateNameHint', {static: false}) updateNameHint: ElementRef;
 
   ngOnInit(): void {
     this.route.data.subscribe(routeData => {
-      const data = routeData.data;
-      if (data) {
-        this.user = data;
+      const user = routeData.data;
+      if (user) {
+        this.user = user;
         this.createForm(this.user.name);
       }
     });
   }
 
-  onSubmit() {
-    if (this.itemValue) {
-      this.db.list('items').push({content: this.itemValue});
-      this.itemValue = '';
-    }
-  }
+  // onSubmit() {
+  //   if (this.itemValue) {
+  //     this.db.list('items').push({content: this.itemValue});
+  //     this.itemValue = '';
+  //   }
+  // }
 
   createForm(name) {
     this.profileForm = this.fb.group({
@@ -53,11 +58,17 @@ export class HomeComponent implements OnInit {
   }
 
   save(value) {
-    this.userService.updateCurrentUser(value).then(console.log);
+    this.userService.updateCurrentUser(value)
+      .then(() => this.toggleUpdateNameLink('none'));
   }
 
   logout() {
     this.authService.doLogout()
-      .then(() => this.location.back(), (error) => console.log(error));
+      .then(() => this.location.back(), error => console.log(error));
+  }
+
+  toggleUpdateNameLink(show) {
+    this.updateNameLink.nativeElement.style.display = show;
+    this.updateNameHint.nativeElement.style.display = show === 'inline' ? 'none' : 'inline';
   }
 }
