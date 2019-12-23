@@ -42,8 +42,7 @@ export class RegisterComponent {
   tryRegister(value) {
     this.authService.doRegister(value)
       .then(() => {
-        this.errorMessage = '';
-        this.successMessage = 'Your account has been created';
+        this.router.navigate(['/home']);
       }, err => {
         this.errorMessage = err.message;
         this.successMessage = '';
