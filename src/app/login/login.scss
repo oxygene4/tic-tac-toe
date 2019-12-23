@@ -1,0 +1,39 @@
+.mat-card {
+  padding: 32px;
+  .mat-card-header {
+    display: block;
+  }
+  .mat-card-title {
+    text-align: center;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .submit {
+    .error {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #f44336;
+    }
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 16px;
+    padding-top: 40px;
+  }
+
+  .mat-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .mat-mini-fab + .mat-mini-fab {
+      margin-left: 16px;
+    }
+    .mat-raised-button {
+      margin: 8px;
+    }
+  }
+}

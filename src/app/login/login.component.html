@@ -1,30 +1,47 @@
-<h1>Login</h1>
-<div>
-  <div>
-    <div>
+<div class="container container--flex">
+  <mat-card class="form">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
       <form [formGroup]="loginForm">
-        <div>
-          <label>Email address</label>
-          <input type="email" formControlName="email">
+        <mat-form-field>
+          <input matInput placeholder="Email address" formControlName="email">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+        </mat-form-field>
+
+        <div class="submit">
+          <div class="error" color="warn">{{errorMessage}}</div>
+          <button mat-raised-button (click)="tryLogin(loginForm.value)">Login</button>
         </div>
-        <div>
-          <label>Password</label>
-          <input type="password" formControlName="password">
-          <label class="error">{{errorMessage}}</label>
-        </div>
-        <button type="submit" (click)="tryLogin(loginForm.value)">Login</button>
       </form>
-    </div>
-  </div>
-  <div>
-    <button type="button" (click)="tryFacebookLogin()">Login with Facebook</button>
-  </div>
-  <div>
-    <button type="button" (click)="tryGoogleLogin()">Login with Google</button>
-  </div>
-  <div>
-    <div>
-      <p>No account yet? <a href="/register">Create an account</a></p>
-    </div>
-  </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div>
+        <button disabled color="white" mat-mini-fab aria-label="Login with Facebook" (click)="tryFacebookLogin()">
+          <svg fill="rgba(0,0,0,.87)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="60%">
+            <path d="M17.525,9H14V7c0-1.032,0.084-1.682,1.563-1.682h1.868v-3.18C16.522,2.044,15.608,1.998,14.693,2
+                   C11.98,2,10,3.657,10,6.699V9H7v4l3-0.001V22h4v-9.003l3.066-0.001L17.525,9z"/>
+          </svg>
+        </button>
+        <button color="white" mat-mini-fab aria-label="Login with Google" (click)="tryGoogleLogin()">
+          <svg fill="rgba(0,0,0,.87)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="60%">
+            <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032
+                   s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2
+                   C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div>
+        <p>No account yet? <a mat-button routerLink="/register">Create an account</a></p>
+      </div>
+    </mat-card-actions>
+  </mat-card>
 </div>
+

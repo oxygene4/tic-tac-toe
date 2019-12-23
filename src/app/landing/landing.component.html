@@ -1,9 +1,12 @@
-<div class="landing">
-  <div class="container">
-    <h1>Welcome</h1>
-    <a routerLink="/login">log in</a>
-    or
-    <a routerLink="/register">sign up</a>
-    to start
-  </div>
+<div class="container container--flex">
+  <mat-card class="form">
+    <mat-card-header>
+      <mat-card-title>Welcome</mat-card-title>
+      <mat-card-subtitle>(Landing page)</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <a routerLink="/login" mat-raised-button>log in</a>
+      <a routerLink="/register" mat-raised-button>sign up</a>
+    </mat-card-actions>
+  </mat-card>
 </div>

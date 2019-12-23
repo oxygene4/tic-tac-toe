@@ -2,3 +2,15 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.container {
+  min-height: 100vh;
+  margin: 0 auto;
+  &--flex {
+    display: flex;
+    padding-top: 20vmin;
+    align-items: flex-start;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
