@@ -5,8 +5,8 @@
       <mat-card-subtitle>(Landing page)</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions>
-      <a routerLink="/login" mat-raised-button>log in</a>
-      <a routerLink="/register" mat-raised-button>sign up</a>
+      <a [routerLink]="['/auth', { login: true }]" mat-raised-button>log in</a>
+      <a [routerLink]="['/auth']" mat-raised-button>sign up</a>
     </mat-card-actions>
   </mat-card>
 </div>
