@@ -10,7 +10,7 @@
   }
 }
 
-.field {
+.game.container {
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -21,3 +21,39 @@
   margin-bottom: 32px;
 }
 
+
+
+.select-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+
+  &__player {
+    display: inline-block;
+    padding: 16px;
+    outline: 1px dashed #ccc;
+    cursor: pointer;
+  }
+}
+
+.field {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 3);
+    height: calc(100% / 3);
+    box-sizing: border-box;
+    outline: 1px dashed #ccc;
+    cursor: pointer;
+  }
+}
+
+.new-game {
+  margin: 32px;
+}

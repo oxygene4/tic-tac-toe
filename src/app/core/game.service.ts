@@ -16,14 +16,7 @@ export class GameService {
   constructor(private http: HttpClient) {
   }
 
-  startGame() {
-    this.test();
-  }
-
-  test() {
-    const game = '---------';
-    const player = 'X';
-
-    this.http.get(`${this.baseUrl}${game}/${player}`, this.httpOptions).toPromise().then(console.dir);
+  getNextStep({game, player}) {
+    return this.http.get(`${this.baseUrl}${game}/${player}`, this.httpOptions).toPromise();
   }
 }

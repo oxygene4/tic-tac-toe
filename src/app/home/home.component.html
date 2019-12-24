@@ -1,16 +1,34 @@
 <div *ngIf="user" class="toolbar">
   <div class="container">
     <div class="account">
-      <div>
-        <p>{{ user.name }} {{ user.email }}</p>
-      </div>
+      <div><p>{{ user.name }} {{ user.email }}</p></div>
     </div>
-
     <button mat-raised-button (click)="logout()">Logout</button>
   </div>
 </div>
 
-<div *ngIf="user" class="container field">
+<div *ngIf="user" class="container game">
   <pre class="statistics">{{ user.statistics | json }}</pre>
-  <button mat-raised-button (click)="game.startGame()">play</button>
+
+  <div *ngIf="!isPlaying" class="select-player">
+    <p>Select a player</p>
+    <div>
+      <div class="select-player__player" (click)="choosePlayer(X_MARK)">X</div>
+      <div class="select-player__player" (click)="choosePlayer(O_MARK)">O</div>
+    </div>
+  </div>
+
+  <div *ngIf="isPlaying" class="field">
+    <div class="cell"
+         *ngFor="let cell of gameModel; let i = index"
+         (click)="userStepHandler(i)">
+      {{cell}}
+    </div>
+  </div>
+
+  <button class="new-game"
+          mat-raised-button
+          (click)="finishGame()">
+    New game
+  </button>
 </div>

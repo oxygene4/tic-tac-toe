@@ -25,7 +25,8 @@ export class AuthService {
               played: 0,
               won: 0,
               lost: 0,
-              drawn: 0
+              drawn: 0,
+              unfinished: 0
             }
           };
 
