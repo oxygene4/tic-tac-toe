@@ -20,7 +20,13 @@ export class AuthService {
         .then(fbUserData => {
           const postData = {
             name: form.name || 'user',
-            email: fbUserData.user.email
+            email: fbUserData.user.email,
+            statistics: {
+              played: 0,
+              won: 0,
+              lost: 0,
+              drawn: 0
+            }
           };
 
           this.http.post(`https://api.myjson.com/bins`, postData)

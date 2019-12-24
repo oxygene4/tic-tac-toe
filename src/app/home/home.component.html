@@ -9,3 +9,8 @@
     <button mat-raised-button (click)="logout()">Logout</button>
   </div>
 </div>
+
+<div *ngIf="user" class="container field">
+  <pre class="statistics">{{ user.statistics | json }}</pre>
+  <button mat-raised-button (click)="game.startGame()">play</button>
+</div>

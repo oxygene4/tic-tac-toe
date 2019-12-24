@@ -15,6 +15,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthService} from './core/auth.service';
 import {UserService} from './core/user.service';
+import {GameService} from './core/game.service';
 import {UserResolver} from './home/user.resolver';
 import {AuthGuard} from './core/auth.guard';
 
@@ -36,7 +37,7 @@ import {AuthGuard} from './core/auth.guard';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [AuthService, UserService, UserResolver, AuthGuard],
+  providers: [AuthService, UserService, GameService, UserResolver, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../core/auth.service';
+import {GameService} from '../core/game.service';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
@@ -15,10 +16,11 @@ export class HomeComponent implements OnInit {
   userId: string;
 
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private location: Location,
-    public http: HttpClient,
+    private game: GameService,
+    private http: HttpClient,
   ) {
   }
 
@@ -40,5 +42,9 @@ export class HomeComponent implements OnInit {
   logout() {
     this.authService.doLogout()
       .then(() => this.location.back(), error => console.log(error));
+  }
+
+  test() {
+    this.game.test();
   }
 }

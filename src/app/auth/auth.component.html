@@ -6,7 +6,7 @@
 
     <mat-card-content>
       <form [formGroup]="authForm">
-        <mat-form-field>
+        <mat-form-field *ngIf="!isLoginMode">
           <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
         <mat-form-field>
