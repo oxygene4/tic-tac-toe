@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../core/auth.service';
+import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import {IUser} from '../core/user.model';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +11,14 @@ import {Location} from '@angular/common';
   styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  user: any;
+  user: IUser;
+  userId: string;
 
   constructor(
     public authService: AuthService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    public http: HttpClient,
   ) {
   }
 
@@ -22,7 +26,13 @@ export class HomeComponent implements OnInit {
     this.route.data.subscribe(routeData => {
       const user = routeData.data;
       if (user) {
-        this.user = user;
+        this.userId = user.displayName;
+
+        this.http.get(this.userId)
+          .toPromise()
+          .then((userJson: IUser) => {
+            this.user = userJson;
+          });
       }
     });
   }

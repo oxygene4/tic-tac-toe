@@ -1,7 +1,7 @@
-<div class="toolbar">
+<div *ngIf="user" class="toolbar">
   <div class="account">
     <div>
-      <p>{{ user.displayName }}</p>
+      <p>{{ user.email }}</p>
     </div>
   </div>
 
