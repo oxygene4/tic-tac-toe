@@ -31,7 +31,7 @@ export class AuthComponent implements OnInit {
   }
 
   createForm() {
-    this.authForm = this.formBuilder.group({email: '12@12.12', password: '123123123'});
+    this.authForm = this.formBuilder.group({name: '', email: '12@12.12', password: '123123123'});
   }
 
   tryAuth(value) {

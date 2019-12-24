@@ -1,9 +1,11 @@
 <div *ngIf="user" class="toolbar">
-  <div class="account">
-    <div>
-      <p>{{ user.email }}</p>
+  <div class="container">
+    <div class="account">
+      <div>
+        <p>{{ user.name }} {{ user.email }}</p>
+      </div>
     </div>
-  </div>
 
-  <button mat-raised-button (click)="logout()">Logout</button>
+    <button mat-raised-button (click)="logout()">Logout</button>
+  </div>
 </div>

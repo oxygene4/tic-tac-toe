@@ -14,12 +14,13 @@ export class AuthService {
   ) {
   }
 
-  doRegister(value) {
+  doRegister(form) {
     return new Promise<any>((resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
+      firebase.auth().createUserWithEmailAndPassword(form.email, form.password)
         .then(fbUserData => {
           const postData = {
-            email: 1
+            name: form.name || 'user',
+            email: fbUserData.user.email
           };
 
           this.http.post(`https://api.myjson.com/bins`, postData)

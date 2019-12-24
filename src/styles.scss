@@ -12,9 +12,10 @@ body {
 }
 
 .container {
-  min-height: 100vh;
+  max-width: 900px;
   margin: 0 auto;
   &--flex {
+    min-height: 100vh;
     display: flex;
     padding-top: 20vmin;
     align-items: flex-start;
