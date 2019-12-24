@@ -13,9 +13,9 @@ export class UserService {
 
   getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
-      const user = firebase.auth().onAuthStateChanged(сurrentUser => {
-        if (сurrentUser) {
-          resolve(сurrentUser);
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          resolve(user);
         } else {
           reject('No user logged in');
         }
@@ -23,13 +23,11 @@ export class UserService {
     });
   }
 
-  updateCurrentUser(value) {
+  updateCurrentUser(uri) {
     return new Promise<any>((resolve, reject) => {
       const user = firebase.auth().currentUser;
-      user.updateProfile({
-        displayName: value.name,
-        photoURL: user.photoURL
-      }).then(res => resolve(res), err => reject(err));
+      user.updateProfile({displayName: uri})
+        .then(res => resolve(res), err => reject(err));
     });
   }
 }

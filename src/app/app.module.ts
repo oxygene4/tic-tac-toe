@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule, routingComponents} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
@@ -25,6 +26,7 @@ import {AuthGuard} from './core/auth.guard';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    HttpClientModule,
     ...materialComponents,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),

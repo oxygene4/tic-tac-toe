@@ -1,41 +1,9 @@
 <div class="toolbar">
   <div class="account">
-    <img class="avatar" [src]="user.image" *ngIf="user.image" alt="User image">
     <div>
-      <p *ngIf='user.provider !== "password"'>{{ user.name }}</p>
-
-      <div *ngIf='user.provider === "password"'>
-        <form [formGroup]="profileForm">
-          <input class="account-input"
-                 (focus)="toggleUpdateNameLink('inline')"
-                 (blur)="save(profileForm.value)"
-                 formControlName="name"
-                 required
-                 type="text">
-
-          <span class="update-name-hint" #updateNameHint>
-              <mat-icon>edit</mat-icon>
-          </span>
-          <span class="update-name-link" #updateNameLink>
-            <mat-icon (click)="save(profileForm.value)">save</mat-icon>
-          </span>
-        </form>
-      </div>
+      <p>{{ user.displayName }}</p>
     </div>
   </div>
 
   <button mat-raised-button (click)="logout()">Logout</button>
 </div>
-
-
-<!--<h3>NG course requirements</h3>-->
-<!--<form (ngSubmit)="onSubmit()">-->
-<!--  <input type="text" name="item" required [(ngModel)]="itemValue">-->
-
-<!--  <button type="submit">add</button>-->
-<!--</form>-->
-
-<!--<pre *ngFor="let item of items | async">-->
-<!--    {{ item.content }}-->
-<!--</pre>-->
-

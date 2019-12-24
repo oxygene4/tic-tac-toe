@@ -1,27 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { UserService } from '../core/user.service';
-import { FirebaseUserModel } from '../core/user.model';
+import {Injectable} from '@angular/core';
+import {Resolve, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {UserService} from '../core/user.service';
 
 @Injectable()
-export class UserResolver implements Resolve<FirebaseUserModel> {
+export class UserResolver implements Resolve<any> {
 
-  constructor(public userService: UserService, private router: Router) { }
+  constructor(public userService: UserService, private router: Router) {
+  }
 
-  resolve(route: ActivatedRouteSnapshot): Promise<FirebaseUserModel> {
-    const user = new FirebaseUserModel();
-
+  resolve(route: ActivatedRouteSnapshot): Promise<any> {
     return new Promise((resolve, reject) => {
       this.userService.getCurrentUser()
-      .then(res => {
-          user.image = res.photoURL || 'https://image.flaticon.com/icons/png/512/747/747376.png';
-          user.name = res.displayName || 'user';
-          user.provider = res.providerData[0].providerId;
-          return resolve(user);
-      }, err => {
-        this.router.navigate(['/landing']);
-        return reject(err);
-      });
+        .then(res => resolve(res),
+          err => {
+            console.dir(err);
+            this.router.navigate(['/landing']);
+            return reject(err);
+          });
     });
   }
 }

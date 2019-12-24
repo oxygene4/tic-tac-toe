@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {UserService} from './user.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 
@@ -6,21 +8,35 @@ import * as firebase from 'firebase/app';
 export class AuthService {
 
   constructor(
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public http: HttpClient,
+    public userService: UserService,
   ) {
   }
 
   doRegister(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-        .then(res => resolve(res), err => reject(err));
+        .then(fbUserData => {
+          const postData = {
+            email: 1
+          };
+
+          this.http.post(`https://api.myjson.com/bins`, postData)
+            .toPromise()
+            .then((bin: any) => {
+              this.userService.updateCurrentUser(bin.uri)
+                .then(() => resolve(fbUserData));
+            });
+        }, err => reject(err));
     });
   }
 
   doLogin(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-        .then(res => resolve(res), err => reject(err));
+        .then(fbUserData => resolve(fbUserData),
+          err => reject(err));
     });
   }
 

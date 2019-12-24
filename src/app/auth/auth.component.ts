@@ -31,28 +31,13 @@ export class AuthComponent implements OnInit {
   }
 
   createForm() {
-    this.authForm = this.formBuilder.group({email: '', password: ''});
+    this.authForm = this.formBuilder.group({email: '12@12.12', password: '123123123'});
   }
 
   tryAuth(value) {
-    if (this.isLoginMode) {
-      this.tryLogin(value);
-    } else {
-      this.tryRegister(value);
-    }
-  }
+    const action =  this.isLoginMode ? 'doLogin' : 'doRegister';
 
-  tryLogin(value) {
-    this.authService.doLogin(value)
-      .then(() => {
-        this.router.navigate(['/home']);
-      }, err => {
-        this.errorMessage = err.message;
-      });
-  }
-
-  tryRegister(value) {
-    this.authService.doRegister(value)
+    this.authService[action](value)
       .then(() => {
         this.router.navigate(['/home']);
       }, err => {
