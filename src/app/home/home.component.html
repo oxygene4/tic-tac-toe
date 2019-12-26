@@ -19,8 +19,9 @@
   </div>
 
   <div *ngIf="isPlaying" class="field">
-    <div class="cell"
-         *ngFor="let cell of gameModel; let i = index"
+    <div *ngFor="let cell of gameModel; let i = index"
+         class="cell"
+         [class.winnerCell]=" winnerCells.includes(i)"
          (click)="userStepHandler(i)">
       {{cell}}
     </div>

@@ -51,6 +51,10 @@
     box-sizing: border-box;
     outline: 1px dashed #ccc;
     cursor: pointer;
+    &.winnerCell {
+      background-color: #444;
+      color: #eee;
+    }
   }
 }
 
