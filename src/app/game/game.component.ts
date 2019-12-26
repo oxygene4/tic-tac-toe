@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../core/auth.service';
-import {GameService} from '../core/game.service';
+import {AuthService} from '../services/auth.service';
+import {GameService} from '../services/game.service';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {IUser} from '../core/user.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.scss']
+  selector: 'app-game',
+  templateUrl: 'game.component.html',
+  styleUrls: ['game.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class GameComponent implements OnInit {
   user: IUser;
   isPlaying = false;
   isLoading = false;
@@ -103,8 +103,8 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
 
     this.game.getNextStep({player: this.opponentMark, game: this.gameModelForApi})
-      .then((data: any) => {
-        this.gameModel[data.recommendation] = this.opponentMark;
+      .then((recommendation: number) => {
+        this.gameModel[recommendation] = this.opponentMark;
         this.checkState();
         this.isLoading = false;
       });

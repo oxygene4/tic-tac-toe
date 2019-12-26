@@ -1,9 +1,8 @@
 import {RouterModule, Routes} from '@angular/router';
 
 import {LandingComponent} from './landing/landing.component';
-import {HomeComponent} from './home/home.component';
-import {AuthComponent} from './auth/auth.component';
-import {UserResolver} from './home/user.resolver';
+import {GameComponent} from './game/game.component';
+import {UserResolver} from './core/user.resolver';
 import {AuthGuard} from './core/auth.guard';
 import {NgModule} from '@angular/core';
 
@@ -20,26 +19,19 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'auth',
-    component: AuthComponent,
-    pathMatch: 'full',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
+    path: 'game',
+    component: GameComponent,
     resolve: {data: UserResolver}
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'landing'
   }
 ];
 
 export const routingComponents = [
   LandingComponent,
-  AuthComponent,
-  HomeComponent
+  GameComponent
 ];
 
 @NgModule({

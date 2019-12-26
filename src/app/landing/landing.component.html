@@ -1,12 +1,41 @@
 <div class="container container--flex">
-  <mat-card class="form">
-    <mat-card-header>
-      <mat-card-title>Welcome</mat-card-title>
-      <mat-card-subtitle>(Landing page)</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-      <a [routerLink]="['/auth', { login: true }]" mat-raised-button>log in</a>
-      <a [routerLink]="['/auth']" mat-raised-button>sign up</a>
-    </mat-card-actions>
-  </mat-card>
+  <h2>Welcome to my app</h2>
+
+  <mat-card-content>
+    <mat-card class="auth-form">
+      <mat-card-header>
+        <mat-card-title>{{isLoginMode ? 'Login' : 'Register'}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="authForm">
+          <mat-form-field *ngIf="!isLoginMode">
+            <input matInput placeholder="Name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Email address" formControlName="email">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Password" formControlName="password">
+          </mat-form-field>
+
+          <div class="submit">
+            <div class="error">{{errorMessage}}</div>
+            <button mat-raised-button (click)="tryAuth(authForm.value)">{{isLoginMode ? 'Login' : 'Register'}}</button>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <p *ngIf="!isLoginMode">Already have an account?
+          <button mat-button (click)="changeAuthMode()">Login</button>
+        </p>
+
+        <p *ngIf="isLoginMode">No account yet?
+          <button mat-button (click)="changeAuthMode()">Create an account</button>
+        </p>
+      </mat-card-actions>
+    </mat-card>
+  </mat-card-content>
 </div>
