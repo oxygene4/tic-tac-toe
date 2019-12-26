@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {IUser} from './user.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
@@ -18,5 +19,9 @@ export class GameService {
 
   getNextStep({game, player}) {
     return this.http.get(`${this.baseUrl}${game}/${player}`, this.httpOptions).toPromise();
+  }
+
+  sendStatToServer(user: IUser) {
+    return this.http.put(user.displayName, user).toPromise();
   }
 }

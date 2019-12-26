@@ -22,7 +22,6 @@
 }
 
 
-
 .select-player {
   display: flex;
   flex-direction: column;
@@ -38,10 +37,84 @@
 }
 
 .field {
-  width: 300px;
-  height: 300px;
+  position: relative;
+  width: 288px;
+  height: 288px;
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
+
+  &:after {
+    position: absolute;
+    display: none;
+    content: '';
+    background-color: #ccc;
+  }
+
+  &[class*='row']:after {
+    display: block;
+    width: 100%;
+    height: 3px;
+  }
+
+  &.row1:after {
+    transform: translateY(48px);
+  }
+
+  &.row2:after {
+    transform: translateY(144px);
+  }
+
+  &.row3:after {
+    transform: translateY(240px);
+  }
+
+  &[class*='col']:after {
+    display: block;
+    height: 100%;
+    width: 3px;
+  }
+
+  &.col1:after {
+    transform: translateX(48px);
+  }
+
+  &.col2:after {
+    transform: translateX(144px);
+  }
+
+  &.col3:after {
+    transform: translateX(240px);
+  }
+
+  &[class*='dia']:after {
+    display: block;
+    top: 0;
+    height: 3px;
+    width: 141%;
+    transform-origin: 0 0;
+  }
+
+  &.dia1:after {
+    transform: rotate(45deg);
+  }
+
+  &.dia2:after {
+    transform: translateY(288px) rotate(-45deg);
+  }
+
+  &.isGameOver {
+    .cell {
+      cursor: not-allowed;
+    }
+  }
+
+  &.isLoading {
+    .cell {
+      cursor: progress;
+    }
+  }
+
   .cell {
     display: flex;
     justify-content: center;
@@ -51,10 +124,6 @@
     box-sizing: border-box;
     outline: 1px dashed #ccc;
     cursor: pointer;
-    &.winnerCell {
-      background-color: #444;
-      color: #eee;
-    }
   }
 }
 

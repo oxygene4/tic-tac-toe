@@ -1,12 +1,15 @@
 interface IStatistics {
-  played: 0;
-  won: 0;
-  lost: 0;
-  drawn: 0;
+  played: number;
+  won: number;
+  lost: number;
+  drawn: number;
+  unfinished: number;
 }
 
 export interface IUser {
   email: string;
   name: string;
+  userId: string;
+  displayName: string;
   statistics: IStatistics;
 }

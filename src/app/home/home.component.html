@@ -18,18 +18,30 @@
     </div>
   </div>
 
-  <div *ngIf="isPlaying" class="field">
+  <div *ngIf="isPlaying"
+       class="field"
+       [class.isLoading]="isLoading"
+       [class.isGameOver]="isGameOver"
+       [class.row1]="winnerLine === 'row1'"
+       [class.row2]="winnerLine === 'row2'"
+       [class.row3]="winnerLine === 'row3'"
+       [class.col1]="winnerLine === 'col1'"
+       [class.col2]="winnerLine === 'col2'"
+       [class.col3]="winnerLine === 'col3'"
+       [class.dia1]="winnerLine === 'dia1'"
+       [class.dia2]="winnerLine === 'dia2'">
     <div *ngFor="let cell of gameModel; let i = index"
          class="cell"
-         [class.winnerCell]=" winnerCells.includes(i)"
          (click)="userStepHandler(i)">
       {{cell}}
     </div>
   </div>
 
-  <button class="new-game"
-          mat-raised-button
-          (click)="finishGame()">
-    New game
-  </button>
+  <div *ngIf="isResultShown">
+    <button class="new-game"
+            mat-raised-button
+            (click)="resetGame()">
+      New game
+    </button>
+  </div>
 </div>

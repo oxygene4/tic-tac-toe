@@ -13,10 +13,10 @@ import {IUser} from '../core/user.model';
 })
 export class HomeComponent implements OnInit {
   user: IUser;
-  userId: string;
   isPlaying = false;
   isLoading = false;
   isGameOver = false;
+  isResultShown = false;
   X_MARK = 'X';
   O_MARK = 'O';
   gameModel: string[] = ['', '', '', '', '', '', '', '', ''];
@@ -37,12 +37,18 @@ export class HomeComponent implements OnInit {
     this.route.data.subscribe(routeData => {
       const user = routeData.data;
       if (user) {
-        this.userId = user.displayName;
-
-        this.http.get(this.userId)
+        this.http.get(user.displayName)
           .toPromise()
           .then((userJson: IUser) => {
+            const {played, won, lost, drawn, unfinished} = userJson.statistics;
+            const correctStat = played - won - lost - drawn === unfinished;
+
             this.user = userJson;
+            this.user.displayName = user.displayName;
+
+            if (!correctStat) {
+              this.updateStatistics('all');
+            }
           });
       }
     });
@@ -69,40 +75,37 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  get winnerCells() {
-    // todo fix winnerCells definition
-    return this.gameModelObject[this.winnerLine] || [];
-  }
-
   choosePlayer(chosenMark) {
-    this.gameModel = ['', '', '', '', '', '', '', '', ''];
-    this.currentPlayerMark = this.X_MARK;
     this.userMark = chosenMark;
-    this.isGameOver = false;
-    this.winnerLine = '';
 
     if (chosenMark !== this.X_MARK) {
       this.makeStep();
     }
 
     this.isPlaying = true;
+    this.updateStatistics('played');
   }
 
   userStepHandler(cellIndex) {
     if (this.gameModel[cellIndex] || this.isLoading || this.isGameOver) {
       return;
     }
-    this.isLoading = true;
+
     this.gameModel[cellIndex] = this.userMark;
-    this.checkWinner();
-    this.makeStep();
+    this.checkState();
+
+    if (!this.isGameOver) {
+      this.makeStep();
+    }
   }
 
   makeStep() {
+    this.isLoading = true;
+
     this.game.getNextStep({player: this.opponentMark, game: this.gameModelForApi})
       .then((data: any) => {
         this.gameModel[data.recommendation] = this.opponentMark;
-        this.checkWinner();
+        this.checkState();
         this.isLoading = false;
       });
   }
@@ -111,10 +114,9 @@ export class HomeComponent implements OnInit {
     this.currentPlayerMark = this.currentPlayerMark === this.X_MARK ? this.O_MARK : this.X_MARK;
   }
 
-  checkWinner() {
+  checkState() {
     const finished = this.gameModel.every(Boolean);
     const filledLines = Object.entries(this.gameModelObject).filter(([_, cells]) => cells.every(Boolean));
-
     const hasWinnerLine = filledLines.find(([_, cells]) => {
       return cells.every((mark, index, self) => mark === self[0]);
     });
@@ -122,17 +124,46 @@ export class HomeComponent implements OnInit {
     this.winnerLine = hasWinnerLine ? hasWinnerLine[0] : '';
     this.isGameOver = finished || !!this.winnerLine;
 
-    if (!this.isGameOver) {
+    if (finished && !this.winnerLine) {
+      this.isGameOver = true;
+      this.isResultShown = true;
+      this.updateStatistics('drawn');
+    } else if (this.winnerLine) {
+      const userWon = this.userMark === this.currentPlayerMark;
+
+      this.isGameOver = true;
+      this.isResultShown = true;
+      this.updateStatistics(userWon ? 'won' : 'lost');
+    } else {
       this.toggleCurrentPlayer();
     }
   }
 
-  finishGame() {
+  resetGame() {
+    this.gameModel = ['', '', '', '', '', '', '', '', ''];
+    this.currentPlayerMark = this.X_MARK;
+    this.isGameOver = false;
+    this.isResultShown = false;
+    this.winnerLine = '';
     this.isPlaying = false;
+  }
+
+  updateStatistics(key) {
+    if (key === 'all') {
+      const {played, won, lost, drawn} = this.user.statistics;
+      this.user.statistics.unfinished = played - won - lost - drawn;
+    } else {
+      this.user.statistics[key]++;
+    }
+
+    this.game.sendStatToServer(this.user)
+      .then((user: IUser) => {
+        this.user.statistics = user.statistics;
+      });
   }
 
   logout() {
     this.authService.doLogout()
-      .then(() => this.location.back(), error => console.log(error));
+      .then(() => this.location.back());
   }
 }
