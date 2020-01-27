@@ -1,0 +1,11 @@
+<div #wrapper class="parallax hidden">
+  <div *ngFor="let div of parallaxItems"
+       [ngClass]="['level-' + div.level, div.type]"
+       [style.top]='div.top'
+       [style.left]='div.left'
+       [style.width]='div.size'
+       [style.height]='div.size'
+       [style.transition-delay]='div.delay'
+       [style.background-image]="ticSrc">
+  </div>
+</div>

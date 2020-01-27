@@ -1,0 +1,54 @@
+.parallax {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 45vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+  background-color: #DCE2D8;
+  perspective: 500px;
+  overflow: hidden;
+
+  &.hidden [class*='level'] {
+    transform: translateY(-110vh);
+  }
+
+  & [class*='level'] {
+    position: absolute;
+    background-size: auto 100%;
+    transition: 1.2s;
+    transform: translate3d(0,0,5px);
+    z-index: 5;
+    will-change: transform;
+    &.tic {
+      background-position: 0 0;
+    }
+    &.tac {
+      background-position: 100% 0;
+    }
+  }
+
+  .level-1 {
+    filter: blur(1px);
+    z-index: 4;
+    transform: translate3d(0,0,20px);
+  }
+
+  .level-2 {
+    filter: blur(2px);
+    z-index:3;
+    transform: translate3d(0,0,40px);
+  }
+
+  .level-3 {
+    filter: blur(3px);
+    z-index: 2;
+    transform: translate3d(0,0,60px);
+  }
+
+  .level-4 {
+    filter: blur(4px);
+    z-index: 1;
+    transform: translate3d(0,0,80px);
+  }
+}

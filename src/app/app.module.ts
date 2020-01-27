@@ -19,11 +19,13 @@ import {UserService} from './services/user.service';
 import {GameService} from './services/game.service';
 import {UserResolver} from './core/user.resolver';
 import {AuthGuard} from './core/auth.guard';
+import { ParallaxComponent } from './parallax/parallax.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    ParallaxComponent
   ],
   imports: [
     AppRoutingModule,

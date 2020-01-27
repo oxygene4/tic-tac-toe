@@ -1,41 +1,21 @@
-<div class="container container--flex">
-  <h2>Welcome to my app</h2>
+<div class="landing">
+  <app-parallax></app-parallax>
 
-  <mat-card-content>
-    <mat-card class="auth-form">
-      <mat-card-header>
-        <mat-card-title>{{isLoginMode ? 'Login' : 'Register'}}</mat-card-title>
-      </mat-card-header>
+  <div class="title">tic tac toe</div>
 
-      <mat-card-content>
-        <form [formGroup]="authForm">
-          <mat-form-field *ngIf="!isLoginMode">
-            <input matInput placeholder="Name" formControlName="name">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Email address" formControlName="email">
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput type="password" placeholder="Password" formControlName="password">
-          </mat-form-field>
-
-          <div class="submit">
-            <div class="error">{{errorMessage}}</div>
-            <button mat-raised-button (click)="tryAuth(authForm.value)">{{isLoginMode ? 'Login' : 'Register'}}</button>
-          </div>
-        </form>
-      </mat-card-content>
-
-      <mat-card-actions>
-        <p *ngIf="!isLoginMode">Already have an account?
-          <button mat-button (click)="changeAuthMode()">Login</button>
-        </p>
-
-        <p *ngIf="isLoginMode">No account yet?
-          <button mat-button (click)="changeAuthMode()">Create an account</button>
-        </p>
-      </mat-card-actions>
-    </mat-card>
-  </mat-card-content>
+  <div class="form-wrapper">
+    <form [formGroup]="authForm" class="form">
+      <div class="actions">
+        <button [disabled]="!isLoginMode" (click)="changeAuthMode()">sign in</button>
+        <button [disabled]="isLoginMode" (click)="changeAuthMode()">sign up</button>
+      </div>
+      <div class="inputs">
+        <input placeholder="e-mail" formControlName="email" type="text">
+        <input type="password" placeholder="password" formControlName="password">
+      </div>
+      <div class="join">
+        <button (click)="tryAuth(authForm.value)">join</button>
+      </div>
+    </form>
+  </div>
 </div>
