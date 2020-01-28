@@ -6,8 +6,19 @@
   height: 100vh;
   transform-style: preserve-3d;
   background-color: #DCE2D8;
-  perspective: 500px;
+  perspective: 700px;
   overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    box-shadow: 0 0 20px 30px rgba(0,0,0,.5);
+    z-index: 6;
+  }
 
   &.hidden [class*='level'] {
     transform: translateY(-110vh);
@@ -17,12 +28,14 @@
     position: absolute;
     background-size: auto 100%;
     transition: 1.2s;
-    transform: translate3d(0,0,5px);
+    transform: translateZ(-2px);
     z-index: 5;
     will-change: transform;
+
     &.tic {
       background-position: 0 0;
     }
+
     &.tac {
       background-position: 100% 0;
     }
@@ -31,24 +44,24 @@
   .level-1 {
     filter: blur(1px);
     z-index: 4;
-    transform: translate3d(0,0,20px);
+    transform: translateZ(-15px);
   }
 
   .level-2 {
     filter: blur(2px);
-    z-index:3;
-    transform: translate3d(0,0,40px);
+    z-index: 3;
+    transform: translateZ(-30px);
   }
 
   .level-3 {
     filter: blur(3px);
     z-index: 2;
-    transform: translate3d(0,0,60px);
+    transform: translateZ(-45px);
   }
 
   .level-4 {
     filter: blur(4px);
     z-index: 1;
-    transform: translate3d(0,0,80px);
+    transform: translateZ(-60px);
   }
 }

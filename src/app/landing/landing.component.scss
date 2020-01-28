@@ -1,5 +1,6 @@
 .landing {
   display: flex;
+  background-color: #F3F3F3;
 }
 
 .title {
@@ -8,7 +9,7 @@
   font-size: calc(12vh + 14px);
   text-transform: uppercase;
   padding: 1vh;
-  color: #555;
+  color: #303346;
   font-weight: bold;
   text-align: center;
   pointer-events: none;
