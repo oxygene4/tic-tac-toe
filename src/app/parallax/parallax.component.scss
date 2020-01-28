@@ -27,7 +27,7 @@
   & [class*='level'] {
     position: absolute;
     background-size: auto 100%;
-    transition: 1.2s;
+    transition: transform 1.2s;
     transform: translateZ(-2px);
     z-index: 5;
     will-change: transform;
