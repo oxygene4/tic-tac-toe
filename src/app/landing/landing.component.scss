@@ -6,13 +6,15 @@
 .title {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-size: calc(12vh + 14px);
+  font-size: calc(6vmax + 16px);
   text-transform: uppercase;
   padding: 1vh;
   color: #303346;
-  font-weight: bold;
+  font-weight: 800;
   text-align: center;
+  letter-spacing: 4px;
   pointer-events: none;
+  font-family: Firs, sans-serif;
 }
 
 .form-wrapper {
@@ -23,6 +25,9 @@
 
 .form {
   width: 530px;
+  &, & * {
+    font-family: Ocras, sans-serif;
+  }
 
   .actions {
     button {

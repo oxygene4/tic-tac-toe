@@ -11,7 +11,6 @@ import {environment} from '../environments/environment';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import materialComponents from './materialComponents';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthService} from './services/auth.service';
@@ -31,7 +30,6 @@ import { ParallaxComponent } from './parallax/parallax.component';
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    ...materialComponents,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

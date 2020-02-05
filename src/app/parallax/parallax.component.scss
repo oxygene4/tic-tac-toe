@@ -4,19 +4,17 @@
   left: 0;
   width: 45vw;
   height: 100vh;
-  transform-style: preserve-3d;
   background-color: #DCE2D8;
-  perspective: 700px;
   overflow: hidden;
 
   &:before {
     content: '';
     position: absolute;
-    right: 0;
+    right: -2px;
     top: 0;
     bottom: 0;
     width: 2px;
-    box-shadow: 0 0 20px 30px rgba(0,0,0,.5);
+    box-shadow: -33px 0 40px 40px rgba(0, 0, 0, 0.55);
     z-index: 6;
   }
 
@@ -26,42 +24,45 @@
 
   & [class*='level'] {
     position: absolute;
-    background-size: auto 100%;
+    background-size: 95%;
+    background-position: center;
+    background-repeat: no-repeat;
     transition: transform 1.2s;
-    transform: translateZ(-2px);
-    z-index: 5;
-    will-change: transform;
 
-    &.tic {
-      background-position: 0 0;
+    &:nth-child(4n+1) {
+      background-image: url('../../assets/item4.png');
     }
 
-    &.tac {
-      background-position: 100% 0;
+    &:nth-child(4n+2) {
+      background-image: url('../../assets/item3.png');
+    }
+
+    &:nth-child(4n+3) {
+      background-image: url('../../assets/item2.png');
+    }
+
+    &:nth-child(4n+4) {
+      background-image: url('../../assets/item1.png');
     }
   }
 
   .level-1 {
-    filter: blur(1px);
+    filter: blur(1px) drop-shadow(-10px 10px 15px rgba(0,0,0,0.55));
     z-index: 4;
-    transform: translateZ(-15px);
   }
 
   .level-2 {
-    filter: blur(2px);
+    filter: blur(2px) drop-shadow(-10px 10px 15px rgba(0,0,0,0.55));
     z-index: 3;
-    transform: translateZ(-30px);
   }
 
   .level-3 {
-    filter: blur(3px);
+    filter: blur(3px) drop-shadow(-10px 10px 15px rgba(0,0,0,0.55));
     z-index: 2;
-    transform: translateZ(-45px);
   }
 
   .level-4 {
-    filter: blur(4px);
+    filter: blur(4px) drop-shadow(-10px 10px 15px rgba(0,0,0,0.55));
     z-index: 1;
-    transform: translateZ(-60px);
   }
 }

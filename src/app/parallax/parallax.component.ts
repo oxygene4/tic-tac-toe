@@ -26,9 +26,9 @@ import parallaxItems from './items';
 })
 export class ParallaxComponent implements AfterViewInit {
   @ViewChild('wrapper', {static: true}) wrapper;
-
+  mouseX = 0;
+  mouseY = 0;
   parallaxItems = [];
-  ticSrc = 'url(https://www.pinclipart.com/picdir/big/391-3916354_ios-tic-tac-toe-with-an-unbeatable-ai.png)';
 
   constructor() {
     this.parallaxItems = parallaxItems;
@@ -36,10 +36,8 @@ export class ParallaxComponent implements AfterViewInit {
 
   @HostListener('window:mousemove', ['$event'])
   KeyDownCtrl(e) {
-    const x = Math.round(e.pageX / window.innerWidth * 80);
-    const y = Math.round(e.pageY / window.innerHeight * 80);
-
-    this.wrapper.nativeElement.style.perspectiveOrigin = `${-x}% ${-y}%`;
+    this.mouseY = (e.pageX / window.innerWidth);
+    this.mouseX = (e.pageY / window.innerHeight);
   }
 
   ngAfterViewInit() {
