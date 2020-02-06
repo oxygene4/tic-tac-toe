@@ -1,3 +1,5 @@
+@import "assets/toaster";
+
 @font-face {
   font-family: 'Firs';
   src: url('/assets/TT Firs Black.otf');
@@ -8,26 +10,17 @@
   src: url('/assets/OCRAStd.otf');
 }
 
+@font-face {
+  font-family: 'Amateur';
+  src: url('/assets/Amateur Naked.ttf');
+}
+
 html {
   &, & * {
-    font-family: "Helvetica Neue", sans-serif;
-  }
-}
-
-body {
-  margin: 0;
-  font-family: "Helvetica Neue", sans-serif;
-}
-
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  &--flex {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Ocras', sans-serif;
+    &::selection {
+      background-color: rgba(#16d462, 0.4);
+    }
   }
 }

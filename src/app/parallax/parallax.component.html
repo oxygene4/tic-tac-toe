@@ -1,10 +1,11 @@
 <div #wrapper class="parallax hidden">
   <div *ngFor="let div of parallaxItems"
-       [ngClass]="['level-' + div.level, div.type]"
+       [ngClass]="['level-' + div.level]"
        [style.top]="div.top + div.level * mouseY + '%'"
        [style.left]="div.left + div.level * mouseX + '%'"
        [style.width]="div.size + 'vmin'"
        [style.height]="div.size + 'vmin'"
-       [style.transition-delay]="'transform ' + div.delay">
+       [style.transition-delay]="div.delay + 's'">
   </div>
+  <ng-content></ng-content>
 </div>

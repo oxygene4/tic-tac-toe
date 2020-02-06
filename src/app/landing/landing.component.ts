@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {ToasterService} from '../services/toaster.service';
 
 @Component({
   selector: 'app-landing',
@@ -10,13 +11,13 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class LandingComponent {
   authForm: FormGroup;
-  errorMessage = '';
   isLoginMode = true;
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toaster: ToasterService
   ) {
     this.createForm();
   }
@@ -30,13 +31,8 @@ export class LandingComponent {
   }
 
   tryAuth(value) {
-    const action = this.isLoginMode ? 'doLogin' : 'doRegister';
-
-    this.authService[action](value)
-      .then(() => {
-        this.router.navigate(['/game']);
-      }, err => {
-        this.errorMessage = err.message;
-      });
+    this.authService[this.isLoginMode ? 'doLogin' : 'doRegister'](value)
+      .then(() => this.router.navigate(['/game']),
+        err => this.toaster.showToast(err.message));
   }
 }
