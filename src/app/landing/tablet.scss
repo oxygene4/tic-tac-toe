@@ -1,0 +1,77 @@
+// https://www.freeformatter.com/css-beautifier.html
+
+@media (max-width: 995px) {
+  .landing {
+    overflow: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .call-to-action {
+    bottom: 0;
+    right: 0;
+    left: auto;
+    margin: 4.1vmin;
+    padding: 2.5vmin;
+    width: 60%;
+    &__text {
+      font-size: calc(1vw + 12px);
+      line-height: calc(2vw + 12px);
+    }
+  }
+
+  .title {
+    position: absolute;
+    top: 65vh;
+    right: 22vw;
+    width: 100%;
+    writing-mode: horizontal-tb;
+    transform: rotate(-55.5deg);
+    font-size: calc(6vw + 8px);
+  }
+
+  .main {
+    display: block;
+    position: absolute;
+    width: 99.5vw;
+    height: 99.5vh;
+    left: 0;
+    top: 0;
+    z-index: 8;
+    padding: 3vmin 0 0 3vmin;
+    transform-style: preserve-3d;
+    background: linear-gradient(124.5deg, #F3F3F3 49%, rgba(0, 0, 0, 0.55) calc(49% + 1px), transparent calc(49% + 80px));
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      transform: translateZ(-1px);
+      height: 0;
+      box-shadow: 33px 0 40px 40px rgba(0, 0, 0, 0.55);
+    }
+  }
+
+  .form-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 64px 0 0 48px;
+    max-width: 50%;
+    &,
+    & * {
+      font-size: calc(1vmin + 12px);
+    }
+  }
+}
+
+@media (max-width: 775px) {
+  .title {
+    position: absolute;
+    top: 60vh;
+    right: 25vw;
+    width: 100%;
+    font-size: calc(6vw + 10px);
+  }
+}

@@ -66,3 +66,14 @@
     z-index: 1;
   }
 }
+
+@media (max-width: 995px) {
+  .parallax {
+    position: absolute;
+    width: 100%;
+
+    &:before {
+      display: none;
+    }
+  }
+}
